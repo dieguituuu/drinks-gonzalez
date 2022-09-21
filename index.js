@@ -1,8 +1,14 @@
-// const edad = parseInt(prompt('¿Cuantos años tenes?'))
+const edad = parseInt(prompt('¿Cuantos años tenes?'))
+const blanco = document.getElementById('blanco')
 
-// edad >= 18 ? alert('¡Bienvenido/a a Mystic Drinks!') : alert('Sos menor de edad, no podes comprar alcohol.')
+if(edad >=18) {
+    alert('Bienvenido/a a Mystic Drinks.')
+  } else {
+    alert('Lo sentimos, sos menor de edad.')
+    document.getElementById('blanco').style.display = "none";
+  }
 
-const productos = [
+const producto = [
     {id: 1, nombre: 'Jägermeister', precio: '$2,200', img: 'jager.jpg'},
     {id: 2, nombre: 'Smirnoff', precio: '$1.400', img: 'smirnoff.jpg'},
     {id: 3, nombre: 'Fernet Branca', precio: '$1.100', img: 'fernet.jpg'},
@@ -12,13 +18,35 @@ const productos = [
     {id: 7, nombre: 'Red Bull', precio: '$350', img: 'red-bull.jpg'},
     {id: 8, nombre: 'Coca-Cola', precio: '$280', img: 'coca-cola.jpg'},
     {id: 9, nombre: 'Baggio', precio: '$190', img: 'baggio.jpg'},
-    {id: 10, nombre: 'Termidor', precio: '$240', img: 'baggio.jpg'},
+    {id: 10, nombre: 'Termidor', precio: '$240', img: 'termidor.jpg'},
     {id: 11, nombre: 'Manaos', precio: '$160', img: 'manaos.jpg'}    
 ]
 
-const cards = document.querySelector('.main__content')
+const contenedorProductos = document.getElementById('prod-content')
+const carrito = []
 
-for (let index = 0; index < array.length; index++) {
-    const element = array[index];
-    
+producto.forEach((producto) => {
+    const div = document.createElement('div')
+    div.classList.add('producto')
+    div.innerHTML =  `
+    <div class='prod-cards'>
+    <img src='./assets/${producto.img}' alt='' class='prod-img'>
+    <h3 class='prod-nombre'>${producto.nombre}</h3>
+    <p class='prod-precio'>${producto.precio}</p>
+    <button id='agregar${producto.id}' class='prod-btn'>Agregar al carrito</button>
+    </div>
+    `
+    contenedorProductos.appendChild(div)
+})
+
+const agregarAlCarrito = (prodId) => {
+    const item = producto.find((prod) => prod.id === prodId)
+    carrito.push(item)
 }
+
+const boton = document.getElementById('agregar${producto.id}')
+boton.addEventListener('click', () => {
+    agregarAlCarrito(producto.id)
+    console.log('agregado al carrito')
+})
+
