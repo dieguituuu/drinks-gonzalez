@@ -1,5 +1,9 @@
 const edad = parseInt(prompt('¿Cuantos años tenes?'))
+
 const blanco = document.getElementById('blanco')
+const contenedorCarrito = document.getElementById('carrito-contenedor')
+const botonCarrito = document.getElementById('boton-carrito')
+const carritoDiv = document.getElementById('carrito')
 
 if(edad >=18) {
     alert('Bienvenido/a a Mystic Drinks.')
@@ -37,16 +41,49 @@ producto.forEach((producto) => {
     </div>
     `
     contenedorProductos.appendChild(div)
+    const boton = document.getElementById(`agregar${producto.id}`)
+    boton.addEventListener('click', () => {
+        agregarAlCarrito(producto.id)
+    })
 })
 
 const agregarAlCarrito = (prodId) => {
     const item = producto.find((prod) => prod.id === prodId)
+    const existe = carrito.some(prod=>prod.id === producto.id)
+    if(existe === false) {
+        producto.cantidad = 1;
+        carrito.push(producto)
+    } else {
+        const encontrarProd = carrito.find(prod=> prod.id ===producto.id);
+        encontrarProd.cantidad++;
+    }
     carrito.push(item)
+    actualizarCarrito()
 }
 
-const boton = document.getElementById('agregar${producto.id}')
-boton.addEventListener('click', () => {
-    agregarAlCarrito(producto.id)
-    console.log('agregado al carrito')
-})
+const actualizarCarrito = () => {
+    carritoDiv.innerHTML = '';
+    carrito.forEach(producto=> {
+        carritoDiv.innerHTML +=`
+        <div class= 'carrito-prod'>
+        <h3 class= 'carrito-prod-nombre'>${producto.nombre}</h3>
+        <p class= 'carrito-prod-cant'></p>
+        <p class= 'carrito-prod-precio'>${producto.precio}</p>
 
+        `
+    }
+        )
+}
+    
+
+
+function renderizarCarrito() {
+    const existe = carrito.some(prod=>prod.id === producto.id)
+    if(existe === false) {
+        producto.cantidad = 1;
+        carrito.push(producto)
+    } else {
+        const encontrarProd = carrito.find(prod=> prod.id ===producto.id);
+        encontrarProd.cantidad++;
+    }
+}
