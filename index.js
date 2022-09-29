@@ -6,9 +6,17 @@ const botonCarrito = document.getElementById('boton-carrito')
 const carritoDiv = document.getElementById('carrito')
 
 if(edad >=18) {
-    alert('Bienvenido/a a Mystic Drinks.')
+    Swal.fire(
+        '¡Bienvenido/a a Mystic Drinks!',
+        'Tenes edad para comprar alcohol.',
+        'success'
+      )
   } else {
-    alert('Lo sentimos, sos menor de edad.')
+    Swal.fire(
+        ':(',
+        'Sos menor de edad.',
+        'error'
+      )
     document.getElementById('blanco').style.display = "none";
   }
 
