@@ -1,0 +1,14 @@
+ [
+    {"id": 1, "nombre": "Jägermeister", "precio": 2200, "img": "jager.jpg"},
+    {"id": 2, "nombre": "Smirnoff", "precio": 1400, "img": "smirnoff.jpg"},
+    {"id": 3, "nombre": "Fernet Branca", "precio": 1100, "img": "fernet.jpg"},
+    {"id": 4, "nombre": "Absolut", "precio": 1650, "img": "absolut.jpg"},
+    {"id": 5, "nombre": "Jack Daniels", "precio": 3400, "img": "jack-daniels.jpg"},
+    {"id": 6, "nombre": "Speed", "precio": 325, "img": "speed.jpg"},
+    {"id": 7, "nombre": "Red Bull", "precio": 350, "img": "red-bull.jpg"},
+    {"id": 8, "nombre": "Coca-Cola", "precio": 280, "img": "coca-cola.jpg"},
+    {"id": 9, "nombre": "Baggio", "precio": 190, "img": "baggio.jpg"},
+    {"id": 10, "nombre": "Termidor", "precio": 240, "img": "termidor.jpg"},
+    {"id": 11, "nombre": "Manaos", "precio": 160, "img": "manaos.jpg"}    
+]
+
