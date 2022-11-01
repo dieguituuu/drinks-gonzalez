@@ -43,9 +43,6 @@ function crearProductos(arr) {
 })
 }
 
-
-
-
 // Se guardan los productos en localStorage.
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('carrito')){
@@ -81,6 +78,7 @@ function agregarAlCarrito(producto){
 }        
 
 function actualizarCarrito()  {
+    contenedorCarrito.innerHTML = ""
     carrito.forEach(producto=> {
         let div = document.createElement('div')
         div.innerHTML +=`
@@ -88,15 +86,15 @@ function actualizarCarrito()  {
         <p>${producto.nombre}</p>
         <p class= 'carrito-prod-precio'>${producto.precio}</p>
         <p class= 'carrito-prod-cant'>${producto.cantidad}</p>
-        <button onclick='eliminarDelCarrito(${producto.id})' class='boton-eliminar'><i class='fas fa-trash-alt'></i></button>
+        <button onclick='eliminarDelCarrito(${producto.id})' class='boton-eliminar'><span>X</span></button>
         </div>
         `
         contenedorCarrito.appendChild(div)
 
+        localStorage.setItem('carrito', JSON.stringify(carrito))
     })
-    localStorage.setItem('carrito', JSON.stringify(carrito))
     contadorCarrito.innerText = carrito.lenght
-    precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.precio, 0)
+    precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.precio*prod.cantidad, 0)
 }
 
 // Función para eliminar productos del carrito.
@@ -107,18 +105,16 @@ const eliminarDelCarrito = (prodId) => {
     actualizarCarrito()
 }
 
-// Función para actualizar el carrito.
-
 // Función para que se acumulen los productos iguales dentro del carrito.
 function renderizarCarrito(producto) {
     const existe = carrito.some(prod=>prod.id === producto.id)
-    if(existe === false) {
-        producto.cant = 1;
-        carrito.push(producto)
-    } else {
-        const encontrarProd = carrito.find(prod=> prod.id ===producto.id);
-        encontrarProd.cant++;
-    }
+    // if(existe === false) {
+    //     producto.cantidad = 1;
+    //     carrito.push(producto)
+    // } else {
+    //     const encontrarProd = carrito.find(prod=> prod.id ===producto.id);
+    //     encontrarProd.cantidad++;
+    // }
 }
 
 // Constantes necesarias para el modal del carrito.
